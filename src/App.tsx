@@ -1,27 +1,46 @@
 import { useState } from "react";
-import { Teste } from "./components/teste/Teste";
 
 export function App() {
 
-  // Como mostrar ou esconder o elemento na tela
+  // Como trabalhar com listas
 
-  const [hide, setHide] = useState(false);
+  const [list, setList] = useState([
+    'Fazer Café',
+    'Fazer Café',
+    'Fazer Almoço',
+    'Fazer Janta',
+    'Fazer Merenda',
+  ]);
+
+  const [listComID, setlistComID] = useState([
+    { id: '1', label: 'Fazer Café' },
+    { id: '2', label: 'Fazer Café' },
+    { id: '3', label: 'Fazer Almoço' },
+    { id: '4', label: 'Fazer Merenda' },
+  ]);
 
   return (
     <div>
 
-      {hide && <p>Teste 1</p>}
-      {!hide && <p>Teste 2</p>}
+      <input type="text" />
+
+      <button>Adicionar</button>
 
 
-      {hide && <div >
-        <h1>Div apareceu</h1>
-      </div>}
+      <ol>
+        {list.map((listItem) => (
+          <li key={listItem}>{listItem}</li>
+        ))}
+      </ol>
 
-      {hide && <Teste />}
-      <button onClick={() => setHide(!hide)}>
-        Clique Aqui
-      </button>
+
+      <ol>
+        {listComID.map((listItemComId) => (
+          <li key={listItemComId.id}>
+            {listItemComId.label}
+          </li>
+        ))}
+      </ol>
 
     </div>
   );
