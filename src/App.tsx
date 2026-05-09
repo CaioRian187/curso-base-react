@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { InputAdd } from "./components/InputAdd";
 
 export function App() {
 
-  // Como adicionando elementos na lista
+  // Componentizando a aplicação
 
-  const [value, setValue] = useState('');
   const [list, setList] = useState([
     { id: '1', label: 'Fazer Café', complete: false },
     { id: '2', label: 'Fazer Café', complete: false },
@@ -12,20 +12,18 @@ export function App() {
     { id: '4', label: 'Fazer Merenda', complete: false },
   ]);
 
+
+  const handleAdd = (value: string) => {
+    setList([
+      ...list,
+      { id: (list.length + 1).toString(), complete: false, label: value }]);
+  }
+
   return (
     <div>
 
-      <input
-        value={value}
-        type="text"
-        onChange={(event) => setValue(event.target.value)} />
+      <InputAdd onAdd={handleAdd} />
 
-      <button onClick={() => {
-        setList([...list, { id: (list.length + 1).toString(), label: value, complete: false }]);
-        setValue('');
-      }}>
-        Adicionar
-      </button>
 
       <ol>
         {list.map((listItemComId) => (
