@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { InputAdd } from "./components/InputAdd";
 import { TodoItem } from "./components/TodoItem";
+import { List } from "./components/List";
 
 export function App() {
 
@@ -19,14 +20,27 @@ export function App() {
       ...list,
       { id: (list.length + 1).toString(), complete: false, label: value }]);
   }
+  const handleRemove = (id: string) => {
+    setList([
+      ...list.filter(item => item.id !== id),
+    ])
+  }
+
+  const handleComplete = (id: string) => {
+    setList([
+      ...list.map(item => ({
+        ...item,
+        complete: item.id === id ? true : item.complete
+      })),
+    ])
+  }
 
   return (
     <div>
 
       <InputAdd onAdd={handleAdd} />
 
-
-      <ol>
+      <List>
         {list.map((listItemComId) => (
           <TodoItem
             key={listItemComId.id}
@@ -35,16 +49,12 @@ export function App() {
             label={listItemComId.label}
             complete={listItemComId.complete}
 
-            onRemove={() => setList([...list.filter(item => item.id !== listItemComId.id)])}
-            onComplete={() => setList([
-              ...list.map(item => ({
-                ...item,
-                complete: item.id === listItemComId.id ? true : item.complete
-              }))
-            ])}
+            onRemove={() => handleRemove(listItemComId.id)}
+            onComplete={() => handleComplete(listItemComId.id)}
+
           />
         ))}
-      </ol>
+      </List>
 
     </div>
   );
