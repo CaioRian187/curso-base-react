@@ -5,7 +5,7 @@ import { List } from "./components/List";
 
 export function App() {
 
-  // Componentizando a aplicação
+  // Utilizando o mirage para simular um servidor
 
   const [list, setList] = useState([
     { id: '1', label: 'Fazer Café', complete: false },
