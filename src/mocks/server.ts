@@ -10,8 +10,7 @@ createServer({
         if (todosAsString === null) return;
         const todos = JSON.parse(todosAsString);
 
-        todos.models.forEach((todo: {}) => server.schema.create('todos', todo));
-
+        todos.forEach((todo: any) => server.schema.create('todos', todo));
     },
     routes() {
         this.namespace = 'api';
@@ -23,38 +22,35 @@ createServer({
         this.post('/todos', (schema, request) => {
             const attrs = JSON.parse(request.requestBody);
 
-            // Sempre que for cadastrar um novo todo esses dados seram persistidos no localstorage
-            const todos = schema.all('todos');
-            localStorage.setItem("MOCK_TODOS", JSON.stringify(todos));
-
-
             const todo = schema.create('todos', attrs);
+
+            const todosClean = schema.all('todos').models.map(t => t.attrs);
+            localStorage.setItem("MOCK_TODOS", JSON.stringify(todosClean));
+
             return todo;
         });
 
         this.put('/todos/:id', (schema, request) => {
             const id = request.params.id;
-
             const newAttrs = JSON.parse(request.requestBody);
 
             const todo = schema.find('todos', id);
             todo?.update(newAttrs);
 
-            const todos = schema.all('todos');
-            localStorage.setItem("MOCK_TODOS", JSON.stringify(todos));
+            const todosClean = schema.all('todos').models.map(t => t.attrs);
+            localStorage.setItem("MOCK_TODOS", JSON.stringify(todosClean));
 
             return {};
         });
 
-        this.delete('todos:id', (schema, request) => {
+        this.delete('/todos/:id', (schema, request) => {
             const id = request.params.id;
 
             const todo = schema.find('todos', id);
+            todo?.destroy();
 
-            todo?.destroy()
-
-            const todos = schema.all('todos');
-            localStorage.setItem("MOCK_TODOS", JSON.stringify(todos));
+            const todosClean = schema.all('todos').models.map(t => t.attrs);
+            localStorage.setItem("MOCK_TODOS", JSON.stringify(todosClean));
 
             return {};
         });
