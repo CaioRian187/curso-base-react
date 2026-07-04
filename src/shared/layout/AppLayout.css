@@ -1,0 +1,15 @@
+.layout_base {
+    padding: 8px;
+    background-color: rgb(230, 230, 230);
+
+}
+
+.layout_header {
+    padding: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+.layout_divider {
+    border-color: black;
+}

@@ -1,70 +1,11 @@
-import { useState, useEffect } from "react";
-import { InputAdd } from "./components/InputAdd";
-import { TodoItem } from "./components/TodoItem";
-import { List } from "./components/List";
-import { TodoApi, type ITodo } from "./shared/services/api/TodoAPI";
 
-TodoApi.getAll().then(data => console.log('1', data));
+import { Home } from "./pages/Home";
+import { AppLayout } from "./shared/layout/AppLayout";
 
 export function App() {
-
-  // Cadastrando um Todo com o TodoAPI
-
-  const [list, setList] = useState<ITodo[]>([]);
-
-  useEffect(() => {
-    TodoApi.getAll().then(data => setList(data));
-  }, [])
-
-  const handleAdd = (value: string) => {
-    TodoApi.create({ label: value, complete: false })
-      .then(data => { setList([...list, data]) })
-  }
-
-  const handleRemove = (id: string) => {
-
-    TodoApi.deleteById(id)
-      .then(() => {
-        setList([
-          ...list.filter(item => item.id !== id),
-        ])
-      });
-  }
-
-  const handleComplete = (id: string) => {
-    TodoApi.updateById(id, { complete: true })
-      .then(() => {
-        setList([
-          ...list.map(item => ({
-            ...item,
-            complete: item.id === id ? true : item.complete
-          })),
-        ])
-      })
-
-  }
-
   return (
-    <div>
-
-      <InputAdd onAdd={handleAdd} />
-
-      <List>
-        {list.map((listItemComId) => (
-          <TodoItem
-            key={listItemComId.id}
-
-            id={listItemComId.id}
-            label={listItemComId.label}
-            complete={listItemComId.complete}
-
-            onRemove={() => handleRemove(listItemComId.id)}
-            onComplete={() => handleComplete(listItemComId.id)}
-
-          />
-        ))}
-      </List>
-
-    </div>
+    <AppLayout>
+      <Home />
+    </AppLayout>
   );
 }
