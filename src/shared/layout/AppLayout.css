@@ -1,10 +1,20 @@
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
 .layout_base {
+    height: 100%;
     padding: 8px;
-    background-color: rgb(230, 230, 230);
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    background-color: #f2f2f2;
 }
 
 .layout_header {
@@ -12,8 +22,16 @@
     display: flex;
     gap: 8px;
     justify-content: center;
-}
+    background-color: green;
+    color: white;
+    width: 100%;
 
-.layout_divider {
-    border-color: black;
+    a {
+        padding: 10px;
+    }
+
+    a:hover {
+        background-color: rgb(99, 155, 16);
+        border-radius: 10px;
+    }
 }

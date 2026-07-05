@@ -1,0 +1,18 @@
+.PageLayoutContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.PageContext {
+    min-height: 180px;
+    width: 300px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px #0000001a;
+}
+
+.PageTitle {
+    margin: 0;
+}

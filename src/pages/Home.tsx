@@ -3,6 +3,7 @@ import { TodoApi, type ITodo } from "../shared/services/api/TodoAPI";
 import { InputAdd } from "../components/InputAdd";
 import { List } from "../components/List";
 import { TodoItem } from "../components/TodoItem";
+import { PageLayout } from "../shared/layout/page-layout/PageLayout";
 
 
 export function Home() {
@@ -43,10 +44,8 @@ export function Home() {
     }
 
     return (
-        <div>
-
+        <PageLayout title="Página inicial">
             <InputAdd onAdd={handleAdd} />
-
             <List>
                 {list.map((listItemComId) => (
                     <TodoItem
@@ -63,6 +62,6 @@ export function Home() {
                 ))}
             </List>
 
-        </div>
+        </PageLayout>
     );
 }
