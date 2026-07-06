@@ -1,3 +1,4 @@
+import "./InputAdd.css"
 import { useState } from "react";
 
 interface IInputAddProps {
@@ -21,7 +22,7 @@ export const InputAdd = (props: IInputAddProps) => {
                 type="text"
                 onChange={(event) => setValue(event.target.value)} />
 
-            <button onClick={handleAdd}>
+            <button className="btn-add" onClick={handleAdd}>
                 Adicionar
             </button>
         </div>

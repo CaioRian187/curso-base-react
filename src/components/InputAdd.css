@@ -1,0 +1,15 @@
+input {
+    padding: 5px 60px;
+    border-radius: 4px;
+    border: solid 2px black;
+}
+
+.btn-add {
+    padding: 8px;
+    background-color: green;
+    border-radius: 4px;
+}
+
+.btn-add:hover {
+    opacity: 0.8;
+}
