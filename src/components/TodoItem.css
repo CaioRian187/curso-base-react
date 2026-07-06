@@ -1,0 +1,23 @@
+li {
+    font-size: 18px;
+}
+
+.btn-complete {
+    padding: 8px;
+    background-color: green;
+    border-radius: 4px;
+}
+
+.btn-complete:hover {
+    opacity: 0.8;
+}
+
+.btn-remove {
+    padding: 8px;
+    background-color: red;
+    border-radius: 4px;
+}
+
+.btn-remove:hover {
+    opacity: 0.8;
+}

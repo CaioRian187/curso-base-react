@@ -1,4 +1,4 @@
-
+import "./TodoItem.css"
 
 interface ITodoItemProps {
     id: string,
@@ -14,13 +14,13 @@ export const TodoItem = ({ id, label, complete, onRemove, onComplete }: ITodoIte
         <li key={id}>
             {label}
 
-            {complete ? 'Concluido' : ''}
+            {complete ? ' - Concluido' : ''}
 
-            <button onClick={onComplete}>
+            <button className="btn-complete" onClick={onComplete}>
                 Concluir
             </button>
 
-            <button onClick={onRemove}>
+            <button className="btn-remove" onClick={onRemove}>
                 Remover
             </button>
         </li>
