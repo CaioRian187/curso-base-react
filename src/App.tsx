@@ -3,18 +3,29 @@ import { About } from "./pages/About";
 import { Home } from "./pages/Home";
 import { AppLayout } from "./shared/layout/AppLayout";
 import { Datail } from "./pages/Datail";
+import { Login } from "./pages/public/Login";
 
 export function App() {
+
+  const isAuthenticate = false;
+
   return (
     <BrowserRouter>
-      <AppLayout>
+      {isAuthenticate && (
+        <AppLayout>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/sobre" element={<About />} />
+            <Route path="/detalhe/:id" element={<Datail />} />
+            <Route path="*" element={<Navigate to='/' />} />
+          </Routes>
+        </AppLayout>
+      )}
+      {!isAuthenticate && (
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/sobre" element={<About />} />
-          <Route path="/detalhe/:id" element={<Datail />} />
-          <Route path="*" element={<Navigate to='/' />} />
+          <Route path="*" element={<Login />} />
         </Routes>
-      </AppLayout>
+      )}
     </BrowserRouter>
   );
 }
