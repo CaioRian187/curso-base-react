@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
         setAccessToken(undefined);
     }
     const login = (email: string, password: string) => {
-        console.log(email, password);
 
         // Chamar o backend para fazer a autenticação
 
@@ -38,4 +37,11 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
 
 export const useAuthContext = () => {
     return useContext(AuthContext);
+}
+
+
+export const useIsAuthenticated = () => {
+    const { accessToken } = useAuthContext();
+
+    return accessToken !== undefined;
 }
