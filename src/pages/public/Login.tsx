@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import './Login.css'
+import { useAuthContext } from '../../shared/contexts/AuthContext';
 
 
 export const Login = () => {
+
+    const { login } = useAuthContext();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleLogin = () => {
         console.log("login");
+
+        login(email, password);
     }
 
 
