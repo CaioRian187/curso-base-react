@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./TodoItem.css"
 
 interface ITodoItemProps {
@@ -12,7 +13,10 @@ export const TodoItem = ({ id, label, complete, onRemove, onComplete }: ITodoIte
 
     return (
         <li key={id}>
-            {label}
+
+            <Link to={`/detalhe/${id}`}>
+                {label}
+            </Link>
 
             {complete ? ' - Concluido' : ''}
 
