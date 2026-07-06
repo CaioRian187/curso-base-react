@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useCallback, useContext, useMemo, useState } from "react";
 
 
 interface IAuthContextProps {
@@ -16,17 +16,24 @@ export const AuthProvider = ({ children }: React.PropsWithChildren) => {
     const [accessToken, setAccessToken] = useState<string>();
     const [email, setEmail] = useState<string>();
 
-    const logout = () => {
+    const logout = useCallback(() => {
         setEmail(undefined);
         setAccessToken(undefined);
-    }
-    const login = (email: string, password: string) => {
+    }, [])
+
+    const login = useCallback((email: string, password: string) => {
 
         // Chamar o backend para fazer a autenticação
 
         setEmail(email);
         setAccessToken(crypto.randomUUID());
-    }
+    }, [])  // o useCallback declara e armazena a função, ajuda na performace quando lidamos com context
+
+
+    const detailsUser = useMemo(() => {
+        return `O seu Email é ${email}`
+    }, []) // O useMemo executa a função e armazena o valor que foi retornado
+
 
     return (
         <AuthContext.Provider value={{ logout, login, email, accessToken }}>
